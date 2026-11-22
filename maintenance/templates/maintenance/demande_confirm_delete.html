@@ -1,0 +1,22 @@
+{% extends 'maintenance/base.html' %}
+
+{% block titre %}Supprimer la demande{% endblock %}
+
+{% block contenu %}
+<h2>Supprimer la demande</h2>
+
+<div class="message error">
+    Voulez-vous vraiment supprimer la demande « {{ demande.titre }} » ?
+    Cette action est définitive.
+</div>
+
+<p><strong>Demandeur :</strong> {{ demande.nom_demandeur }}</p>
+<p><strong>Catégorie :</strong> {{ demande.categorie.nom }}</p>
+<p><strong>Statut :</strong> {{ demande.get_statut_display }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="bouton bouton-rouge">Oui, supprimer</button>
+    <a class="bouton bouton-gris" href="{% url 'detail_demande' demande.pk %}">Non, annuler</a>
+</form>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'maintenance/base.html' %}
+
+{% block titre %}Liste des demandes{% endblock %}
+
+{% block contenu %}
+<h2>Liste des demandes</h2>
+
+<form method="get" class="filtres">
+    <select name="categorie">
+        <option value="">Toutes les catégories</option>
+        {% for categorie in categories %}
+            <option value="{{ categorie.id }}" {% if categorie_choisie == categorie.id|stringformat:"s" %}selected{% endif %}>
+                {{ categorie.nom }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <select name="statut">
+        <option value="">Tous les statuts</option>
+        {% for code, nom in statuts %}
+            <option value="{{ code }}" {% if statut_choisi == code %}selected{% endif %}>{{ nom }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit" class="bouton">Filtrer</button>
+    <a href="{% url 'liste_demandes' %}">Réinitialiser</a>
+</form>
+
+<p><a class="bouton" href="{% url 'ajouter_demande' %}">+ Ajouter une demande</a></p>
+
+{% if demandes %}
+<table>
+    <tr>
+        <th>Titre</th>
+        <th>Demandeur</th>
+        <th>Catégorie</th>
+        <th>Date de création</th>
+        <th>Statut</th>
+        <th>Actions</th>
+    </tr>
+    {% for demande in demandes %}
+    <tr>
+        <td>{{ demande.titre }}</td>
+        <td>{{ demande.nom_demandeur }}</td>
+        <td>{{ demande.categorie.nom }}</td>
+        <td>{{ demande.date_creation|date:"d/m/Y H:i" }}</td>
+        <td><span class="statut {{ demande.statut }}">{{ demande.get_statut_display }}</span></td>
+        <td class="actions">
+            <a href="{% url 'detail_demande' demande.pk %}">Voir</a>
+            <a href="{% url 'modifier_demande' demande.pk %}">Modifier</a>
+            <a href="{% url 'supprimer_demande' demande.pk %}" class="rouge">Supprimer</a>
+
+            {% if demande.statut_suivant %}
+            <form method="post" action="{% url 'changer_statut' demande.pk %}" class="form-inline">
+                {% csrf_token %}
+                <input type="hidden" name="statut" value="{{ demande.statut_suivant }}">
+                <input type="hidden" name="retour" value="liste">
+                <button type="submit" class="petit-bouton">Étape suivante</button>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    <p>Aucune demande trouvée.</p>
+{% endif %}
+{% endblock %}

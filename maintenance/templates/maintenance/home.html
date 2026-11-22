@@ -1,0 +1,54 @@
+{% extends 'maintenance/base.html' %}
+
+{% block titre %}Accueil{% endblock %}
+
+{% block contenu %}
+<h2>Bienvenue</h2>
+<p>Cette application permet d'enregistrer et de suivre les demandes de maintenance informatique.</p>
+
+<div class="stats">
+    <div class="carte">
+        <span class="nombre">{{ total }}</span>
+        <span>Demandes au total</span>
+    </div>
+    <div class="carte">
+        <span class="nombre">{{ nb_attente }}</span>
+        <span>En attente</span>
+    </div>
+    <div class="carte">
+        <span class="nombre">{{ nb_en_cours }}</span>
+        <span>En cours de traitement</span>
+    </div>
+    <div class="carte">
+        <span class="nombre">{{ nb_resolues }}</span>
+        <span>Résolues</span>
+    </div>
+</div>
+
+<p>
+    <a class="bouton" href="{% url 'ajouter_demande' %}">Ajouter une demande</a>
+    <a class="bouton bouton-gris" href="{% url 'liste_demandes' %}">Voir toutes les demandes</a>
+</p>
+
+<h3>Dernières demandes</h3>
+{% if dernieres %}
+    <table>
+        <tr>
+            <th>Titre</th>
+            <th>Demandeur</th>
+            <th>Date</th>
+            <th>Statut</th>
+        </tr>
+        {% for demande in dernieres %}
+        <tr>
+            <td><a href="{% url 'detail_demande' demande.pk %}">{{ demande.titre }}</a></td>
+            <td>{{ demande.nom_demandeur }}</td>
+            <td>{{ demande.date_creation|date:"d/m/Y H:i" }}</td>
+            <td><span class="statut {{ demande.statut }}">{{ demande.get_statut_display }}</span></td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Aucune demande pour le moment.</p>
+{% endif %}
+{% endblock %}

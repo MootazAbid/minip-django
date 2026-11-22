@@ -1,0 +1,36 @@
+{% extends 'maintenance/base.html' %}
+
+{% block titre %}{{ demande.titre }}{% endblock %}
+
+{% block contenu %}
+<h2>{{ demande.titre }}</h2>
+
+<div class="detail">
+    <p><strong>Statut :</strong>
+        <span class="statut {{ demande.statut }}">{{ demande.get_statut_display }}</span>
+    </p>
+    <p><strong>Description :</strong><br>{{ demande.description|linebreaksbr }}</p>
+    <p><strong>Demandeur :</strong> {{ demande.nom_demandeur }}</p>
+    <p><strong>E-mail :</strong> {{ demande.email }}</p>
+    <p><strong>Emplacement :</strong> {{ demande.emplacement }}</p>
+    <p><strong>Catégorie :</strong> {{ demande.categorie.nom }}</p>
+    <p><strong>Date de création :</strong> {{ demande.date_creation|date:"d/m/Y à H:i" }}</p>
+</div>
+
+<h3>Changer le statut</h3>
+<form method="post" action="{% url 'changer_statut' demande.pk %}" class="form-inline">
+    {% csrf_token %}
+    <select name="statut">
+        {% for code, nom in statuts %}
+            <option value="{{ code }}" {% if demande.statut == code %}selected{% endif %}>{{ nom }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit" class="bouton">Enregistrer le statut</button>
+</form>
+
+<p class="espace">
+    <a class="bouton" href="{% url 'modifier_demande' demande.pk %}">Modifier</a>
+    <a class="bouton bouton-rouge" href="{% url 'supprimer_demande' demande.pk %}">Supprimer</a>
+    <a class="bouton bouton-gris" href="{% url 'liste_demandes' %}">Retour à la liste</a>
+</p>
+{% endblock %}

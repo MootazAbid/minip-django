@@ -1,0 +1,241 @@
+/* Style général */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+}
+
+.conteneur {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* En-tête et menu */
+header {
+    background-color: #1f3a5f;
+    color: white;
+}
+
+.entete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 22px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    background-color: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    min-height: 400px;
+}
+
+footer {
+    text-align: center;
+    color: #777;
+    padding: 15px;
+}
+
+a {
+    color: #1f6fb2;
+}
+
+/* Boutons */
+.bouton {
+    display: inline-block;
+    background-color: #1f6fb2;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.bouton:hover {
+    opacity: 0.85;
+}
+
+.bouton-gris {
+    background-color: #6c757d;
+}
+
+.bouton-rouge {
+    background-color: #c0392b;
+}
+
+.petit-bouton {
+    background-color: #2e8b57;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Messages */
+.message {
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #eef1f6;
+}
+
+.actions a {
+    margin-right: 6px;
+}
+
+.rouge {
+    color: #c0392b;
+}
+
+/* Statuts */
+.statut {
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    color: white;
+    display: inline-block;
+}
+
+.statut.attente {
+    background-color: #e67e22;
+}
+
+.statut.en_cours {
+    background-color: #2980b9;
+}
+
+.statut.resolue {
+    background-color: #27ae60;
+}
+
+/* Page d'accueil */
+.stats {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+
+.carte {
+    flex: 1;
+    min-width: 150px;
+    background-color: #eef1f6;
+    padding: 15px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.carte .nombre {
+    display: block;
+    font-size: 30px;
+    font-weight: bold;
+    color: #1f3a5f;
+}
+
+/* Formulaires */
+.formulaire {
+    max-width: 600px;
+}
+
+.champ {
+    margin-bottom: 15px;
+}
+
+.champ label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="email"], textarea, select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.erreur {
+    color: #c0392b;
+    font-size: 13px;
+    margin: 4px 0 0 0;
+}
+
+.filtres, .form-inline {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.filtres select, .form-inline select {
+    width: auto;
+}
+
+.form-inline {
+    display: inline-flex;
+    margin-top: 4px;
+}
+
+.detail {
+    background-color: #f9fafc;
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #e3e7ee;
+}
+
+.espace {
+    margin-top: 25px;
+}

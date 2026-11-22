@@ -1,0 +1,28 @@
+{% extends 'maintenance/base.html' %}
+
+{% block titre %}{{ titre_page }}{% endblock %}
+
+{% block contenu %}
+<h2>{{ titre_page }}</h2>
+
+{% if form.errors %}
+    <div class="message error">Le formulaire contient des erreurs. Merci de les corriger.</div>
+{% endif %}
+
+<form method="post" class="formulaire">
+    {% csrf_token %}
+
+    {% for champ in form %}
+    <div class="champ">
+        <label for="{{ champ.id_for_label }}">{{ champ.label }}</label>
+        {{ champ }}
+        {% for erreur in champ.errors %}
+            <p class="erreur">{{ erreur }}</p>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    <button type="submit" class="bouton">Enregistrer</button>
+    <a class="bouton bouton-gris" href="{% url 'liste_demandes' %}">Annuler</a>
+</form>
+{% endblock %}

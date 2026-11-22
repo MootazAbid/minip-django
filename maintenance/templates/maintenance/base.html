@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block titre %}Gestion de maintenance{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'maintenance/style.css' %}">
+</head>
+<body>
+    <header>
+        <div class="conteneur entete">
+            <h1>Maintenance informatique</h1>
+            <nav>
+                <a href="{% url 'accueil' %}">Accueil</a>
+                <a href="{% url 'liste_demandes' %}">Demandes</a>
+                <a href="{% url 'ajouter_demande' %}">Nouvelle demande</a>
+                <a href="/admin/">Administration</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="conteneur">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block contenu %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>Projet Django - DSI23 - ISET</p>
+    </footer>
+</body>
+</html>
